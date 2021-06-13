@@ -3,4 +3,4 @@
 env/
 db.sqlite3
 .idea/
-__pycache__
+**/__pycache__
