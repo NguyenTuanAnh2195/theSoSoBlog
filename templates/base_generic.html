@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>The So So Blog</title>
+  <meta name="description" content="theAverageBlog">
+  <meta name="author" content="NguyenTuanAnh">
+  {% block head %}{% endblock %}
+  <a href="{% url 'user_register' %}">Register</a>
+  <a href="{% url 'user_list' %}">User List</a>
+  <a href="{% url 'login' %}">Login</a>
+</head>
+
+<body>
+  {% block content %}{% endblock %}
+</body>
+</html>
