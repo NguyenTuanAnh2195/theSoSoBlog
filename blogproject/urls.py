@@ -15,8 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from blogapp.views import user_register, BlogUserDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('blogs', include('blogapp.urls'))
+    path('blogs/', include('blogapp.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/register/', user_register, name='user_register'),
+    path('accounts/profile/<int:pk>', BlogUserDetailView.as_view(), name='user_detail'),
 ]

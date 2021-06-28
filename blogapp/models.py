@@ -1,15 +1,11 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
-class User(models.Model):
-    name = models.CharField(max_length=128)
-    email = models.EmailField(max_length=256)
-    password = models.TextField()
+
+
+class BlogUser(User):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"<User {self.name}>"
 
 
 class Post(models.Model):
@@ -17,7 +13,7 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name='blog_posts', null=True, blank=True)
 
     def __str__(self):
         return f"<Post {self.title}>"
