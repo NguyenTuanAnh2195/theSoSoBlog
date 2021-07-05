@@ -2,9 +2,10 @@
 {% block content %}
   {% for user in object_list %}
     <div>
-      <p>Name: {{ user.username }}</p>
+      <a href="{% url 'accounts:user-detail' user.id %}"><p>Name: {{ user.username }}</p></a>
       <p>Email: {{ user.email }}</p>
       <p>Password: {{ user.password }}</p>
+      <p>Created At: {{ user.created_at }}</p>
     </div>
   {% endfor %}
 {% endblock %}

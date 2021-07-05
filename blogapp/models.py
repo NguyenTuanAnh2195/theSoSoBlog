@@ -1,11 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from blogauth.models import BlogProfile
 # Create your models here.
-
-
-class BlogUser(User):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
 class Post(models.Model):
@@ -13,7 +9,10 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name='blog_posts', null=True, blank=True)
+    author = models.ForeignKey(BlogProfile, on_delete=models.CASCADE, related_name='blog_posts', blank=False, null=False)
+
+    class Meta:
+        ordering = ['-created_at']
 
     def __str__(self):
-        return f"<Post {self.title}>"
+        return self.title
