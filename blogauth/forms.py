@@ -13,6 +13,7 @@ class UserRegisterForm(forms.ModelForm):
         user.set_password(self.cleaned_data['password'])
         if commit:
             user.save()
+            profile = BlogProfile.objects.create(user=user)
+            profile.save()
 
         return user
-

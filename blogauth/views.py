@@ -1,11 +1,9 @@
-from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView, CreateView
 from django.contrib.auth.views import LoginView
 
 
 from .models import BlogProfile
 from .forms import UserRegisterForm
-
 
 
 class ProfileRegisterView(CreateView):

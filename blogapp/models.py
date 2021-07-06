@@ -9,7 +9,9 @@ class Post(models.Model):
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    author = models.ForeignKey(BlogProfile, on_delete=models.CASCADE, related_name='blog_posts', blank=False, null=False)
+    author = models.ForeignKey(BlogProfile, on_delete=models.CASCADE,
+                               related_name='blog_posts', blank=False,
+                               null=False)
 
     class Meta:
         ordering = ['-created_at']

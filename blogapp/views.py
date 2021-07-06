@@ -1,6 +1,4 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView
-from django.contrib import messages
+from django.views.generic import ListView, CreateView
 
 from .models import Post
 from blogauth.models import BlogProfile
@@ -9,7 +7,7 @@ from .forms import PostCreateForm
 
 
 class PostListView(ListView):
-    template_name='blogapp/index.html'
+    template_name = 'blogapp/index.html'
     model = Post
     paginate_by = 10
 
@@ -21,5 +19,6 @@ class PostCreateView(CreateView):
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
-        kwargs.update({ 'user': self.request.user })
+        profile = BlogProfile.objects.filter(user=self.request.user)
+        kwargs.update({'author': profile})
         return kwargs

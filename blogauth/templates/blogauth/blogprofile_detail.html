@@ -1,9 +1,9 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-<p>User Name: {{ object.username }}</p>
-<p>First Name: {{ object.first_name }}</p>
-<p>Last Name: {{ object.last_name }}</p>
-<p>Email: {{ object.email }}</p>
+<p>User Name: {{ object.user.username }}</p>
+<p>First Name: {{ object.user.first_name }}</p>
+<p>Last Name: {{ object.user.last_name }}</p>
+<p>Email: {{ object.user.email }}</p>
 <p>Date Joined: {{ object.created_at }}</p>
 {% endblock %}
