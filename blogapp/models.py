@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from blogauth.models import BlogProfile
 # Create your models here.
 
@@ -12,9 +11,22 @@ class Post(models.Model):
     author = models.ForeignKey(BlogProfile, on_delete=models.CASCADE,
                                related_name='blog_posts', blank=False,
                                null=False)
+    likers = models.ManyToManyField(BlogProfile, through='Like')
 
     class Meta:
         ordering = ['-created_at']
 
     def __str__(self):
         return self.title
+
+    def active_likes(self):
+        return self.like_set.filter(active=True)
+
+
+class Like(models.Model):
+    liker = models.ForeignKey(BlogProfile,
+                              on_delete=models.CASCADE)
+    post = models.ForeignKey(Post,
+                             on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=False)

@@ -3,6 +3,6 @@
   {% for post in object_list %}
     <p>Post Title: {{ post.title }}</p>
     <p>Post Content: {{ post.content }} </p>
-    <p>Written By: {{ post.author.username }}</p>
+    <p>Written By: {{ post.author.user.username }}</p>
   {% endfor %}
 {% endblock %}
