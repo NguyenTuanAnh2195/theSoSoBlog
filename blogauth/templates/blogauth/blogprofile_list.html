@@ -1,0 +1,11 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  {% for profile in object_list %}
+    <div>
+      <a href="{% url 'accounts:user-detail' profile.user.id %}"><p>Name: {{ profile.user.username }}</p></a>
+      <p>Email: {{ profile.user.email }}</p>
+      <p>Password: {{ profile.user.password }}</p>
+      <p>Created At: {{ profile.created_at }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

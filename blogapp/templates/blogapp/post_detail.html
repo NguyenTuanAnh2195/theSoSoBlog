@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  <p>Post Title: {{ object.title }}</p>
+  <p>Post Content: {{ object.content }} </p>
+  <p>Written By: {{ object.author.user.username }}</p>
+  <form action="{% url 'blogs:like-post' object.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" value="Like this post" />
+  </form>
+  <p>Liked by {{ object.active_likes.count }} people</p>
+{% endblock %}
+

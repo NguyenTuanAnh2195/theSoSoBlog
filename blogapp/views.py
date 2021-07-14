@@ -1,38 +1,48 @@
-from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView
-from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
+from django.urls import reverse
+from django.shortcuts import redirect
+from django.views.generic import ListView, CreateView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
-from .models import BlogUser, Post
-from .forms import UserRegisterForm
+from .models import Post, Like
+from .forms import PostCreateForm
 # Create your views here.
 
 
-def user_register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('user_list')
-
-    if request.method == 'GET':
-        form = UserRegisterForm()
-
-    return render(
-            request,
-            'blogapp/register.html',
-            {'form': form}
-        )
-
-
-class BlogUserDetailView(DetailView):
-    model = BlogUser
-
-
-class BlogUserListView(ListView):
-    model = BlogUser
-    paginate_by = 10
-
-
 class PostListView(ListView):
+    template_name = 'blogapp/index.html'
     model = Post
     paginate_by = 10
+
+
+class PostDetailView(DetailView):
+    template_name = 'blogapp/post_detail.html'
+    model = Post
+
+
+class PostCreateView(CreateView, LoginRequiredMixin):
+    template_name = 'blogapp/post_create.html'
+    form_class = PostCreateForm
+    success_url = '/blogs/'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        profile = self.request.user.profile
+        kwargs.update({'author': profile})
+        return kwargs
+
+
+@login_required
+def like(request, post_id):
+    if request.method == 'POST':
+        try:
+            like = Like.objects.get(
+                liker=request.user.profile, post_id=post_id)
+            like.active = not like.active
+        except Like.DoesNotExist:
+            like = Like(liker=request.user.profile,
+                        post_id=post_id, active=True)
+        like.save()
+
+    return redirect(reverse('blogs:post-detail', kwargs={'pk': post_id}))

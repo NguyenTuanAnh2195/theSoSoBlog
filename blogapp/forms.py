@@ -1,18 +1,22 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
-from .models import BlogUser
+
+from .models import Like, Post
 
 
-class UserRegisterForm(forms.ModelForm):
+class PostCreateForm(forms.ModelForm):
     class Meta:
-        model = BlogUser
-        fields = ['username', 'email', 'password']
+        model = Post
+        fields = ['title', 'content']
+
+    def __init__(self, *args, **kwargs):
+        self.author = kwargs.pop('author')
+        super().__init__(*args, **kwargs)
 
     def save(self, commit=True):
-        user = super(UserRegisterForm, self).save(commit=False)
-        user.set_password(self.cleaned_data['password'])
+        post = super().save(commit=False)
+        post.author = self.author
         if commit:
-            user.save()
+            post.save()
 
-        return user
+        return post
 

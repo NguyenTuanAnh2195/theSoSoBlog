@@ -8,9 +8,12 @@
   <meta name="description" content="theAverageBlog">
   <meta name="author" content="NguyenTuanAnh">
   {% block head %}{% endblock %}
-  <a href="{% url 'user_register' %}">Register</a>
-  <a href="{% url 'user_list' %}">User List</a>
-  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'accounts:user-register' %}">Register</a>s
+  <a href="{% url 'accounts:user-list' %}">User List</a>
+  <a href="{% url 'accounts:login' %}">Login</a>
+  {% if user.is_authenticated %}
+    <a href="{% url 'blogs:post-create' %}">Write a Post</a>
+  {% endif %}
 </head>
 
 <body>

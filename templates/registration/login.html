@@ -1,6 +1,6 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <form action="{% url 'login' %}" method="post">
+  <form action="{% url 'accounts:login' %}" method="post">
       {% csrf_token %}
       {{ form.non_field_errors }}
       <div class="register_field">
