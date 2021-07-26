@@ -1,5 +1,5 @@
 from django.views.generic import DetailView, ListView, CreateView
-from django.contrib.auth.views import LoginView
+from django.contrib.auth import views
 
 
 from .models import BlogProfile
@@ -12,7 +12,11 @@ class ProfileRegisterView(CreateView):
     template_name = 'blogauth/register.html'
 
 
-class ProfileLoginView(LoginView):
+class ProfileLoginView(views.LoginView):
+    pass
+
+
+class ProfileLogoutView(views.LogoutView):
     pass
 
 

@@ -2,6 +2,7 @@
 
 <html lang="en">
 <head>
+  
   <meta charset="utf-8">
 
   <title>The So So Blog</title>
@@ -10,13 +11,21 @@
   {% block head %}{% endblock %}
   <a href="{% url 'accounts:user-register' %}">Register</a>s
   <a href="{% url 'accounts:user-list' %}">User List</a>
-  <a href="{% url 'accounts:login' %}">Login</a>
+  <a href="{% url 'blogs:index' %}">Post List</a>
   {% if user.is_authenticated %}
     <a href="{% url 'blogs:post-create' %}">Write a Post</a>
+    <a href="{% url 'accounts:logout' %}">Logout</a>
+  {% else %}
+    <a href="{% url 'accounts:login' %}">Login</a>
   {% endif %}
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'blogapp/style.css' %}">
 </head>
 
 <body>
-  {% block content %}{% endblock %}
+  <div class="content">
+    {% block messages %}{% endblock %}
+    {% block content %}{% endblock %}
+  </div>
 </body>
 </html>

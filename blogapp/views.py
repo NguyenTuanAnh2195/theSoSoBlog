@@ -1,7 +1,9 @@
-from django.http import HttpResponse, JsonResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import (
+    ListView, CreateView, DetailView, DeleteView
+)
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 
@@ -14,6 +16,7 @@ class PostListView(ListView):
     template_name = 'blogapp/index.html'
     model = Post
     paginate_by = 10
+    context_object_name = 'posts'
 
 
 class PostDetailView(DetailView):
@@ -24,13 +27,28 @@ class PostDetailView(DetailView):
 class PostCreateView(CreateView, LoginRequiredMixin):
     template_name = 'blogapp/post_create.html'
     form_class = PostCreateForm
-    success_url = '/blogs/'
+    success_url = reverse_lazy('blogs:index')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         profile = self.request.user.profile
         kwargs.update({'author': profile})
         return kwargs
+
+
+class PostDeleteView(DeleteView, LoginRequiredMixin):
+    model = Post
+    success_url = reverse_lazy('blogs:index')
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.author != request.user.profile:
+            messages.add_message(request, messages.ERROR,
+                                 'You do not have the right to delete this post')
+            return redirect(
+                reverse('blogs:post-detail', kwargs={'pk': self.object.id})
+            )
+        return super().post(request, *args, **kwargs)
 
 
 @login_required

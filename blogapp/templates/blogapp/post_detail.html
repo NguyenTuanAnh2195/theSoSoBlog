@@ -1,4 +1,13 @@
 {% extends "base_generic.html" %}
+{% block messages %}
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+{% endblock %}
 {% block content %}
   <p>Post Title: {{ object.title }}</p>
   <p>Post Content: {{ object.content }} </p>
@@ -8,5 +17,15 @@
     <input type="submit" value="Like this post" />
   </form>
   <p>Liked by {{ object.active_likes.count }} people</p>
+  <ul>Tags:
+  {% for tag in object.tags.all %}
+    <li>{{ tag.content }}</li>
+  {% endfor %}
+  </ul>
+
+  <form action="{% url 'blogs:delete-post' object.id %}" method="post">
+    {% csrf_token %}
+    <input type="submit" class="alert" value="Delete this post" />
+  </form>
 {% endblock %}
 

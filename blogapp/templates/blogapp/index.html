@@ -1,7 +1,7 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  {% for post in object_list %}
-    <p>Post Title: {{ post.title }}</p>
+  {% for post in posts %}
+    <p>Post Title: <a href="{% url 'blogs:post-detail' post.id %}">{{ post.title }}</a></p>
     <p>Post Content: {{ post.content }} </p>
     <p>Written By: {{ post.author.user.username }}</p>
   {% endfor %}
