@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Like, Post
+from .models import Post
 
 
 class PostCreateForm(forms.ModelForm):
@@ -19,4 +19,3 @@ class PostCreateForm(forms.ModelForm):
             post.save()
 
         return post
-

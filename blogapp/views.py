@@ -1,7 +1,7 @@
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import (
-    ListView, CreateView, DetailView, DeleteView
+    ListView, CreateView, DetailView, DeleteView, UpdateView
 )
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -34,6 +34,12 @@ class PostCreateView(CreateView, LoginRequiredMixin):
         profile = self.request.user.profile
         kwargs.update({'author': profile})
         return kwargs
+
+
+class PostUpdateView(UpdateView):
+    template_name = 'blogapp/post_create.html'
+    fields = ['title', 'content']
+    model = Post
 
 
 class PostDeleteView(DeleteView, LoginRequiredMixin):
