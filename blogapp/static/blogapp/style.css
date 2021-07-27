@@ -1,0 +1,12 @@
+/* body {
+  background-image: linear-gradient(to right, green, purple);
+  background-repeat: no-repeat;
+} */
+
+.alert {
+  color: red
+}
+
+.messages {
+  color: turquoise;
+}

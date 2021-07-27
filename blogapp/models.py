@@ -3,6 +3,11 @@ from blogauth.models import BlogProfile
 # Create your models here.
 
 
+class Tag(models.Model):
+    content = models.CharField(max_length=256)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+
 class Post(models.Model):
     title = models.CharField(max_length=256)
     content = models.TextField()
@@ -12,6 +17,7 @@ class Post(models.Model):
                                related_name='blog_posts', blank=False,
                                null=False)
     likers = models.ManyToManyField(BlogProfile, through='Like')
+    tags = models.ManyToManyField(Tag)
 
     class Meta:
         ordering = ['-created_at']

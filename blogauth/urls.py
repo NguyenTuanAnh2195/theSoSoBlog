@@ -5,6 +5,7 @@ from .views import (
   BlogProfileListView,
   ProfileRegisterView,
   ProfileLoginView,
+  ProfileLogoutView
 )
 
 app_name = 'accounts'
@@ -13,4 +14,5 @@ urlpatterns = [
     path('', BlogProfileListView.as_view(), name='user-list'),
     path('register/', ProfileRegisterView.as_view(), name='user-register'),
     path('login/', ProfileLoginView.as_view(), name='login'),
+    path('logout/', ProfileLogoutView.as_view(), name='logout'),
 ]
