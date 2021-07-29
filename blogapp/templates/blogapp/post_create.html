@@ -1,6 +1,10 @@
 {% extends "base_generic.html" %}
 {% block content %}
-  <form action="{% url 'blogs:post-create' %}" method="post">
+  {% if object %}
+    <form action="{% url 'blogs:post-update' object.id %}" method="post">
+  {% else %}
+      <form action="{% url 'blogs:post-create' %}" method="post">
+  {% endif %}
       {% csrf_token %}
       {{ form.non_field_errors }}
       <div class="register_field">
@@ -13,6 +17,6 @@
           <label for="{{ form.content.id_for_label }}">Content: </label>
           {{ form.content }}
       </div>
-      <input type="submit" value="Create">
+      <input type="submit" value="{% if object %} Edit {% else %} Create {% endif %}">
   </form>
 {% endblock %}

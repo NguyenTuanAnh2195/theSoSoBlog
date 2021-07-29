@@ -1,7 +1,7 @@
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import (
-    ListView, CreateView, DetailView, DeleteView
+    ListView, CreateView, DetailView, DeleteView, UpdateView
 )
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -24,7 +24,7 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class PostCreateView(CreateView, LoginRequiredMixin):
+class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blogapp/post_create.html'
     form_class = PostCreateForm
     success_url = reverse_lazy('blogs:index')
@@ -36,7 +36,13 @@ class PostCreateView(CreateView, LoginRequiredMixin):
         return kwargs
 
 
-class PostDeleteView(DeleteView, LoginRequiredMixin):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'blogapp/post_create.html'
+    fields = ['title', 'content']
+    model = Post
+
+
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blogs:index')
 

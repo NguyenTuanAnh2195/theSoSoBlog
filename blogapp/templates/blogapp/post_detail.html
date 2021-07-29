@@ -23,9 +23,11 @@
   {% endfor %}
   </ul>
 
-  <form action="{% url 'blogs:delete-post' object.id %}" method="post">
-    {% csrf_token %}
-    <input type="submit" class="alert" value="Delete this post" />
-  </form>
+  {% if object.author == user.profile %}
+    <a href="{% url 'blogs:post-update' object.id %}">Update the Post</a>
+    <form action="{% url 'blogs:delete-post' object.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit" class="alert" value="Delete this post" />
+    </form>
+  {% endif %}
 {% endblock %}
-

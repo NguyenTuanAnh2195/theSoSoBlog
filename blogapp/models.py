@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from blogauth.models import BlogProfile
 # Create your models here.
 
@@ -27,6 +28,9 @@ class Post(models.Model):
 
     def active_likes(self):
         return self.like_set.filter(active=True)
+
+    def get_absolute_url(self):
+        return reverse('blogs:post-detail', kwargs={'pk': self.pk})
 
 
 class Like(models.Model):
