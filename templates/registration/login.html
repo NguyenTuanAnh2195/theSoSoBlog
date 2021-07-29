@@ -10,9 +10,14 @@
       </div>
       <div class="register_field">
           {{ form.password.errors }}
-          <label for="{{ form.password.id_for_label }}">Password: </label>
+          <label for="{{ form.password.id_for_label }}">Passwerd: </label>
           {{ form.password }}
       </div>
       <input type="submit" value="Login">
   </form>
+  {% if next %}
+    <p>Your account doesn't have access to this page, to proceed, please login with an account that has access.</p>
+  {% else %}
+    <p>Please login to see this page.</p>
+  {% endif %}
 {% endblock %}

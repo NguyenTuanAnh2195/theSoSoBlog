@@ -24,7 +24,7 @@ class PostDetailView(DetailView):
     model = Post
 
 
-class PostCreateView(CreateView, LoginRequiredMixin):
+class PostCreateView(LoginRequiredMixin, CreateView):
     template_name = 'blogapp/post_create.html'
     form_class = PostCreateForm
     success_url = reverse_lazy('blogs:index')
@@ -36,13 +36,13 @@ class PostCreateView(CreateView, LoginRequiredMixin):
         return kwargs
 
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'blogapp/post_create.html'
     fields = ['title', 'content']
     model = Post
 
 
-class PostDeleteView(DeleteView, LoginRequiredMixin):
+class PostDeleteView(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blogs:index')
 
