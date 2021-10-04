@@ -6,4 +6,8 @@
 <p>Last Name: {{ object.user.last_name }}</p>
 <p>Email: {{ object.user.email }}</p>
 <p>Date Joined: {{ object.created_at }}</p>
+
+  {% if object.user == user %}
+    <a href="{% url 'accounts:user-update' object.user.id %}">Update User</a>
+  {% endif %}
 {% endblock %}

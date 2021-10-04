@@ -1,10 +1,16 @@
+from typing import Any
+
+from django.http import HttpRequest, HttpResponse
 from django.urls import reverse, reverse_lazy
 from django.shortcuts import redirect
 from django.views.generic import (
     ListView, CreateView, DetailView, DeleteView, UpdateView
 )
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import (
+    LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+)
+
 from django.contrib.auth.decorators import login_required
 
 from .models import Post, Like
@@ -36,25 +42,44 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return kwargs
 
 
-class PostUpdateView(LoginRequiredMixin, UpdateView):
+class PostOwnerPermissionMixin(PermissionRequiredMixin):
+    def dispatch(
+        self,
+        request: HttpRequest,
+        *args: Any,
+        **kwargs: Any
+    ) -> HttpResponse:
+
+        if not request.user.is_authenticated:
+            return redirect('accounts:login')
+
+        # if not request.user.has_perm('blogposts.change_blogpost'):
+        #     return redirect(reverse('blogs:index'))
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PostUpdateView(PostOwnerPermissionMixin, UserPassesTestMixin, UpdateView):
+
+    raise_exception = False
+    permission_required = 'posts.change_post'
+    permission_denied_message = ''
+
     template_name = 'blogapp/post_create.html'
     fields = ['title', 'content']
     model = Post
 
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user.profile
 
-class PostDeleteView(LoginRequiredMixin, DeleteView):
+
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     success_url = reverse_lazy('blogs:index')
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        if self.object.author != request.user.profile:
-            messages.add_message(request, messages.ERROR,
-                                 'You do not have the right to delete this post')
-            return redirect(
-                reverse('blogs:post-detail', kwargs={'pk': self.object.id})
-            )
-        return super().post(request, *args, **kwargs)
+    def test_func(self):
+        obj = self.get_object()
+        return obj.author == self.request.user.profile
 
 
 @login_required
