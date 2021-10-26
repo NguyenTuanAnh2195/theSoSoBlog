@@ -1,0 +1,9 @@
+{% extends "base_generic.html" %}
+{% block content %}
+  {% for account in object_list %}
+    <p>First Name: {{ account.first_name }}</p>
+    <p>Last Name: {{ account.last_name }}</p>
+    <p>User Name: {{ account.username }}</p>
+    <p>Email: {{ account.email }}</p>
+  {% endfor %}
+{% endblock %}
