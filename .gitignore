@@ -175,6 +175,7 @@ typings/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+.idea/**
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -331,3 +332,6 @@ the_so_so_blog/media/
 .env
 .envs/*
 !.envs/.local/
+
+# .idea
+.idea/
