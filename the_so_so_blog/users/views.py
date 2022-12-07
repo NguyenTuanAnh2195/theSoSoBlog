@@ -1,12 +1,7 @@
 from django.contrib.auth import get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.messages.views import SuccessMessageMixin
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import UpdateAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import UpdateAPIView, RetrieveAPIView, ListAPIView
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .serializers import UserDetailSerializer
 from .permissions import IsSameUser
@@ -15,19 +10,27 @@ from ..authentication.serializers import UserUpdatePasswordSerializer
 User = get_user_model()
 
 
+class UserListView(ListAPIView):
+    serializer_class = UserDetailSerializer
+    permission_classes = [AllowAny]
+    queryset = User.objects.all()
+
+
 class UserDetailView(RetrieveAPIView):
     serializer_class = UserDetailSerializer
     permission_classes = [IsAuthenticated]
+    queryset = User.objects.all()
 
 
 class UserUpdateView(UpdateAPIView):
     serializer_class = UserDetailSerializer
     permission_classes = [IsAuthenticated, IsSameUser]
+    queryset = User.objects.all()
 
 
 class UserUpdatePasswordView(UpdateAPIView):
     serializer_class = UserUpdatePasswordSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsSameUser]
     queryset = User.objects.all()
 
     def update(self, request, *args, **kwargs):
