@@ -1,10 +1,18 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework.fields import CharField, EmailField
 
 from .models import User
 
-class BaseUserSerializer(ModelSerializer):
-    first_name = CharField(allow_null=True)
-    last_name = CharField(allow_null=True)
-    email = EmailField(allow_null=False, allow_blank=False)
+
+class UserDetailAdminSerializer(ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "avatar", "is_active", "is_admin", "country", "city",
+                  "address", "email"]
+
+
+class UserDetailSerializer(UserDetailAdminSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "first_name", "last_name", "avatar", "country", "city", "address", "email"]
+
 

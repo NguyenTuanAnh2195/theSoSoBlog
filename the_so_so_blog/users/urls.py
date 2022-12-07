@@ -1,14 +1,14 @@
 from django.urls import path
 
 from the_so_so_blog.users.views import (
-    user_detail_view,
-    user_redirect_view,
-    user_update_view,
+    UserDetailView,
+    UserUpdateView,
+    UserUpdatePasswordView,
 )
 
 app_name = "users"
 urlpatterns = [
-    path("~redirect/", view=user_redirect_view, name="redirect"),
-    path("~update/", view=user_update_view, name="update"),
-    path("<str:username>/", view=user_detail_view, name="detail"),
+    path("<int:pk>/update", view=UserUpdateView.as_view(), name="user_update"),
+    path("<int:pk>/", view=UserDetailView.as_view(), name="user_detail"),
+    path("<int:pk>/update-password/", view=UserUpdatePasswordView.as_view(), name="update_password"),
 ]

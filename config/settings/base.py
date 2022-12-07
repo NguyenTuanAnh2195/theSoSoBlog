@@ -77,6 +77,7 @@ THIRD_PARTY_APPS = [
     "rest_framework.authtoken",
     "corsheaders",
     "drf_spectacular",
+    # "dj-rest-auth",
 ]
 
 LOCAL_APPS = [
@@ -306,8 +307,9 @@ REST_FRAMEWORK = {
         # "rest_framework.authentication.SessionAuthentication",
         # "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
+        # "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticated",),
+    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
@@ -335,3 +337,8 @@ SIMPLE_JWT = {
 # Blog post related settings
 BLOG_TITLE_MAX_LENGTH = 120
 
+# Currently ignoring this in favor of in-house implementation, it's a study project after all
+# # https://dj-rest-auth.readthedocs.io/en/latest/installation.html#json-web-token-jwt-support-optional
+# REST_USE_JWT = True
+# JWT_AUTH_COOKIE = "the-so-so-blog-auth"
+# JWT_AUTH_REFRESH_COOKIE = "the-so-so-blog-refresh"
