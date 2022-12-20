@@ -304,8 +304,8 @@ SOCIALACCOUNT_FORMS = {"signup": "the_so_so_blog.users.forms.UserSocialSignupFor
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        # "rest_framework.authentication.SessionAuthentication",
-        # "rest_framework.authentication.TokenAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.TokenAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
         # "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
@@ -322,7 +322,7 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "The So So Blog API",
     "DESCRIPTION": "Documentation of API endpoints of The So So Blog",
     "VERSION": "1.0.0",
-    "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
+    # "SERVE_PERMISSIONS": ["rest_framework.permissions.IsAdminUser"],
     "SERVERS": [
         {"url": "http://127.0.0.1:8000", "description": "Local Development server"},
         {"url": "https://thesosoblog.io", "description": "Production server"},
@@ -333,6 +333,8 @@ SPECTACULAR_SETTINGS = {
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "SIGNING_KEY": env("DJANGO_SECRET_KEY"),
 }
 # Blog post related settings
 BLOG_TITLE_MAX_LENGTH = 120
