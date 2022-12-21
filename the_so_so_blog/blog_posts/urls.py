@@ -1,17 +1,17 @@
-from django.urls import re_path
+from django.urls import path
 
 from the_so_so_blog.blog_posts.views import (
     CreateBlogPostView,
-    RetrieveAPIView,
+    RetrieveBlogPostView,
     UpdateBlogPostView,
     DeleteBlogPostView,
     ListBlogPostView,
 )
 
 urlpatterns = [
-    re_path("create/", CreateBlogPostView.as_view(), name="create_post"),
-    re_path("retrieve/<int:pk>", RetrieveAPIView.as_view(), name="retrieve_post"),
-    re_path("update/<int:pk>", UpdateBlogPostView.as_view(), name="update_post"),
-    re_path("delete/<int:pk>", DeleteBlogPostView.as_view(), name="delete_post"),
-    re_path("list/", ListBlogPostView.as_view(), name="list_post",)
+    path("create/", CreateBlogPostView.as_view(), name="create_post"),
+    path("retrieve/<int:pk>", RetrieveBlogPostView.as_view(), name="retrieve_post"),
+    path("update/<int:pk>", UpdateBlogPostView.as_view(), name="update_post"),
+    path("delete/<int:pk>", DeleteBlogPostView.as_view(), name="delete_post"),
+    path("list/", ListBlogPostView.as_view(), name="list_post",)
 ]
