@@ -1,11 +1,11 @@
 from django.contrib.auth import get_user_model
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.generics import UpdateAPIView, RetrieveAPIView, ListAPIView
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.generics import ListAPIView, RetrieveAPIView, UpdateAPIView
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from .serializers import UserDetailSerializer
-from .permissions import IsSameUser
 from ..authentication.serializers import UserUpdatePasswordSerializer
+from .permissions import IsSameUser
+from .serializers import UserDetailSerializer
 
 User = get_user_model()
 

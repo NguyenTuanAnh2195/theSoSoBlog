@@ -1,5 +1,7 @@
 from django.db import models
+
 from the_so_so_blog.users.models import User
+
 # Create your models here.
 
 

@@ -2,9 +2,9 @@ from django.urls import path
 
 from the_so_so_blog.users.views import (
     UserDetailView,
-    UserUpdateView,
-    UserUpdatePasswordView,
     UserListView,
+    UserUpdatePasswordView,
+    UserUpdateView,
 )
 
 app_name = "users"

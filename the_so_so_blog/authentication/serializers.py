@@ -1,8 +1,8 @@
+from django.contrib.auth import password_validation
+from django.core import exceptions
 from rest_framework.exceptions import ValidationError
 from rest_framework.fields import CharField, EmailField
 from rest_framework.serializers import ModelSerializer
-from django.contrib.auth import password_validation
-from django.core import exceptions
 
 from the_so_so_blog.users.models import User
 

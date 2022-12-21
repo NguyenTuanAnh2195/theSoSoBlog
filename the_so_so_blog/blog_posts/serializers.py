@@ -1,6 +1,7 @@
-from rest_framework.serializers import ModelSerializer
-from rest_framework.fields import CharField
 from django.conf import settings
+from rest_framework.fields import CharField
+from rest_framework.serializers import ModelSerializer
+
 from the_so_so_blog.users.serializers import UserDetailSerializer
 
 from .models import BlogPost
@@ -18,5 +19,3 @@ class BlogpostSerializer(ModelSerializer):
     def create(self, validated_data):
         validated_data["author"] = self.context["request"].user
         return super().create(validated_data)
-
-

@@ -1,14 +1,15 @@
 from rest_framework.generics import (
     CreateAPIView,
-    UpdateAPIView,
-    ListAPIView,
     DestroyAPIView,
+    ListAPIView,
     RetrieveAPIView,
+    UpdateAPIView,
 )
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 
-from .serializers import BlogpostSerializer
 from .models import BlogPost
+from .serializers import BlogpostSerializer
+
 
 class CreateBlogPostView(CreateAPIView):
     serializer_class = BlogpostSerializer
