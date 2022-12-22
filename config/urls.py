@@ -34,6 +34,7 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
+    print("AAAAAAEWEE")
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [
@@ -53,6 +54,7 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
+        path("hello-webpack/", TemplateView.as_view(template_name="base.html")),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
