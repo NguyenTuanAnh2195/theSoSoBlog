@@ -15,8 +15,8 @@ urlpatterns = [
     path(settings.ADMIN_URL, admin.site.urls),
     # User management
     path(f"api/{VERSION}/users/", include("the_so_so_blog.users.urls", namespace="users")),
-    path(f"api/{VERSION}/auth/", include("the_so_so_blog.authentication.urls")),
-    path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls")),
+    path(f"api/{VERSION}/auth/", include("the_so_so_blog.authentication.urls", namespace="authentication")),
+    path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls", namespace="blog")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
@@ -34,7 +34,6 @@ urlpatterns += [
 ]
 
 if settings.DEBUG:
-    print("AAAAAAEWEE")
     # This allows the error pages to be debugged during development, just visit
     # these url in browser to see how these error pages look like.
     urlpatterns += [

@@ -15,6 +15,10 @@ class CreateBlogPostView(CreateAPIView):
     serializer_class = BlogpostSerializer
     permission_classes = [IsAuthenticated]
     queryset = BlogPost.objects.all()
+    throttle_classes = []
+
+    def get_throttles(self):
+        return super().get_throttles()
 
 
 class RetrieveBlogPostView(RetrieveAPIView):

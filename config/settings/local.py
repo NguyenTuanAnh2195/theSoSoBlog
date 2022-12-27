@@ -61,6 +61,11 @@ CELERY_TASK_EAGER_PROPAGATES = True
 # Your stuff...
 # ------------------------------------------------------------------------------
 
+REST_FRAMEWORK["DEFAULT_THROTTLE_RATES"] = {
+    "anon": "500/hour",
+    "user": "1000/hour",
+}
+
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
