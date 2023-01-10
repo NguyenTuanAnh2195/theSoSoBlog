@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./front_end_assets/components/main_page.jsx":
+/*!***************************************************!*\
+  !*** ./front_end_assets/components/main_page.jsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nfunction MainPage(props) {\n  var blogs = [{\n    \"title\": \"Post 1\",\n    \"content\": \"This is the content for post 1\",\n    \"author\": {\n      \"fullName\": \"Tuan Anh Nguyen\",\n      \"email\": \"tuananhnguyen@mail.com\"\n    }\n  }, {\n    \"title\": \"Post 2\",\n    \"content\": \"This is the content for post 2\",\n    \"author\": {\n      \"fullName\": \"Tuan Anh Nguyen\",\n      \"email\": \"tuananhnguyen@mail.com\"\n    }\n  }, {\n    \"title\": \"Post 3\",\n    \"content\": \"This is the content for post 3\",\n    \"author\": {\n      \"fullName\": \"Tuan Anh Nguyen\",\n      \"email\": \"tuananhnguyen@mail.com\"\n    }\n  }, {\n    \"title\": \"Post 4\",\n    \"content\": \"This is the content for post 4\",\n    \"author\": {\n      \"fullName\": \"Tuan Anh Nguyen\",\n      \"email\": \"tuananhnguyen@mail.com\"\n    }\n  }, {\n    \"title\": \"Post 5\",\n    \"content\": \"This is the content for post 5\",\n    \"author\": {\n      \"fullName\": \"Anon\",\n      \"email\": \"anony@mail.com\"\n    }\n  }];\n  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(\"h1\", null, \"Welcome to the So So Blog\"), /*#__PURE__*/React.createElement(\"h2\", null, \"It's not good, not bad, just so so\"), /*#__PURE__*/React.createElement(\"h3\", null, \"Feel free to browse a selection of blogs made available by the author\"), blogs.map(function (blog) {\n    var _blog$author;\n    /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(\"h4\", null, blog.title), /*#__PURE__*/React.createElement(\"p\", null, blog.content), /*#__PURE__*/React.createElement(\"p\", null, \"Written by: \", blog.author.fullName), /*#__PURE__*/React.createElement(\"p\", null, \"contact the author at: \", (_blog$author = blog.author) === null || _blog$author === void 0 ? void 0 : _blog$author.email));\n  }));\n}\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MainPage);\n\n//# sourceURL=webpack://theSoSoBlog/./front_end_assets/components/main_page.jsx?");
+
+/***/ }),
+
 /***/ "./front_end_assets/index.js":
 /*!***********************************!*\
   !*** ./front_end_assets/index.js ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(\"h1\", null, \"Hello Users of the So So Blog\"), document.getElementById(\"root\"));\n\n//# sourceURL=webpack://theSoSoBlog/./front_end_assets/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ \"./node_modules/react-dom/index.js\");\n/* harmony import */ var _components_main_page_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/main_page.jsx */ \"./front_end_assets/components/main_page.jsx\");\n\n\n\nreact_dom__WEBPACK_IMPORTED_MODULE_1__.render(_components_main_page_jsx__WEBPACK_IMPORTED_MODULE_2__[\"default\"], document.getElementById(\"root\"));\n\n//# sourceURL=webpack://theSoSoBlog/./front_end_assets/index.js?");
 
 /***/ }),
 

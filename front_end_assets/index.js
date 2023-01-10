@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import MainPage from "./components/main_page.jsx";
+
 ReactDOM.render(
-  <h1>Hello Users of the So So Blog</h1>,
+  MainPage,
   document.getElementById("root")
 )

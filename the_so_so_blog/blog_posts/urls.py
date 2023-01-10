@@ -8,6 +8,7 @@ from the_so_so_blog.blog_posts.views import (
     UpdateBlogPostView,
 )
 
+app_name = "blog"
 urlpatterns = [
     path("create/", CreateBlogPostView.as_view(), name="create_post"),
     path("retrieve/<int:pk>", RetrieveBlogPostView.as_view(), name="retrieve_post"),
