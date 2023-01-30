@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import MainPage from "./components/main_page.jsx";
 
 ReactDOM.render(
-  MainPage,
+  <MainPage />,
   document.getElementById("root")
 )
+

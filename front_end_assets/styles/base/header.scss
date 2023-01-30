@@ -1,0 +1,31 @@
+@use "./global";
+
+$primary-color: #232536;
+
+#header {
+  background-color: $primary-color;
+  height: 80px;
+  width: 100%;
+  font-family: Roboto Slab, sans-serif;
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 26px;
+  text-shadow: 1px 0px #5a5c68;
+  flex-basis: 100%;
+}
+
+#blog-title {
+  margin: auto 10% auto 10%;
+}
+
+#blog-quicklinks {
+  margin-right: 50px;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+}

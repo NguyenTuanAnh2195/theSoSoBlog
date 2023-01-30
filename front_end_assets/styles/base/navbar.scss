@@ -1,0 +1,44 @@
+@use "./global";
+
+#navbar {
+  width: 20%;
+  height: 100vh;
+  background-color: #F4F0F8;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  
+  #blog-sections {
+    display: inherit;
+    flex-direction: inherit;
+    justify-content: space-evenly;
+    row-gap: 35px;
+
+    .section-container {
+      width: 250px;
+      height: 50px;
+      border: 2px solid gray;
+      text-align: center;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      font-size: 22px;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+
+  #bio {
+    text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+  
+}
