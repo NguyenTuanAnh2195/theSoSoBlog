@@ -1,0 +1,14 @@
+@use "./global.scss";
+
+.main-page {
+  display: flex;
+  flex-wrap: wrap;
+  
+}
+
+.main-content {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  column-gap: 40px;
+}

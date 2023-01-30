@@ -30,9 +30,13 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
+    "css-loader": "^6.7.3",
     "lodash": "^4.17.21",
     "next": "^13.1.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass": "^1.57.1",
+    "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1"
   }
 }
