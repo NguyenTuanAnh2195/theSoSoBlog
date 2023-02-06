@@ -9,7 +9,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import BlogPost
 from .serializers import BlogpostSerializer
-
+from .permissions import IsAuthor
 
 class CreateBlogPostView(CreateAPIView):
     serializer_class = BlogpostSerializer
@@ -29,13 +29,13 @@ class RetrieveBlogPostView(RetrieveAPIView):
 
 class UpdateBlogPostView(UpdateAPIView):
     serializer_class = BlogpostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAuthor]
     queryset = BlogPost.objects.all()
 
 
 class DeleteBlogPostView(DestroyAPIView):
     serializer_class = BlogpostSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsAuthor]
     queryset = BlogPost.objects.all()
 
 
