@@ -1,5 +1,5 @@
 from django.conf import settings
-from rest_framework.fields import CharField
+from rest_framework.fields import CharField, ChoiceField
 from rest_framework.serializers import ModelSerializer
 
 from the_so_so_blog.users.serializers import UserDetailSerializer
@@ -14,7 +14,7 @@ class BlogpostSerializer(ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ["title", "content", "author", "created_at", "updated_at", "id"]
+        fields = ["title", "content", "author", "created_at", "updated_at", "id", "category"]
 
     def create(self, validated_data):
         validated_data["author"] = self.context["request"].user
