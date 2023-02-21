@@ -1,7 +1,7 @@
 from django.db import models
 
 from the_so_so_blog.users.models import User
-
+from django.conf import settings
 # Create your models here.
 
 
