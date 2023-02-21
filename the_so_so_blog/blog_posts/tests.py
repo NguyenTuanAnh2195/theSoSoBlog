@@ -9,6 +9,7 @@ from the_so_so_blog.blog_posts.models import BlogPost
 
 pytestmark = pytest.mark.django_db(transaction=True)
 
+
 def test_create_and_retrieve_new_blog(user, api_client):
     data = {
         "title": "test title",
