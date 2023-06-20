@@ -12,17 +12,17 @@ VERSION = "v1"
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
     path(settings.ADMIN_URL, admin.site.urls),
+    # Django-rest-auth urls for authentication and registration
+    path(f"api/{VERSION}/auth/", include("rest_auth.urls")),
+    path(f"api/{VERSION}/auth/registration", include("rest_auth.registration.urls")),
     # User management
     path(f"api/{VERSION}/users/", include("the_so_so_blog.users.urls", namespace="users")),
-    path(f"api/{VERSION}/auth/", include("the_so_so_blog.authentication.urls", namespace="authentication")),
     path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls", namespace="blog")),
     # Your stuff: custom urls includes go here
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
 urlpatterns += [
-    # API base url
-    path("api/", include("config.api_router")),
     # DRF auth token
     path("api/schema/", SpectacularAPIView.as_view(), name="api-schema"),
     path(
