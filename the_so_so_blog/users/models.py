@@ -24,4 +24,4 @@ class User(AbstractUser):
     email = EmailField(blank=False, null=False, unique=True)
 
     USERNAME_FIELD = "email"
-    REQUIRED_FIELDS = ["email"]
+    REQUIRED_FIELDS = []

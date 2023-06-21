@@ -28,7 +28,7 @@ DEBUG = env.bool("DJANGO_DEBUG", False)
 TIME_ZONE = "UTC"
 # https://docs.djangoproject.com/en/dev/ref/settings/#language-code
 LANGUAGE_CODE = "en-us"
-# https://docs.djangoproject.com/en/dev/ref/settings/#site-id
+# https://dj-rest-auth.readthedocs.io/en/latest/installation.html#registration-optional
 SITE_ID = 1
 # https://docs.djangoproject.com/en/dev/ref/settings/#use-i18n
 USE_I18N = True
@@ -73,8 +73,8 @@ THIRD_PARTY_APPS = [
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
-    "rest_auth",
-    "rest_auth.registration",
+    "dj_rest_auth",
+    "dj_rest_auth.registration",
     "django_celery_beat",
     "rest_framework",
     "rest_framework.authtoken",
@@ -305,9 +305,9 @@ SOCIALACCOUNT_FORMS = {"signup": "the_so_so_blog.users.forms.UserSocialSignupFor
 # django-rest-framework - https://www.django-rest-framework.org/api-guide/settings/
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_jwt.authentication.JSONWebTokenAuthentication",
         "rest_framework.authentication.SessionAuthentication",
         "rest_framework.authentication.TokenAuthentication",
+        "dj_rest_auth.jwt_auth.JWTCookieAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
@@ -340,7 +340,7 @@ SPECTACULAR_SETTINGS = {
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
     "AUTH_HEADER_TYPES": ("Bearer",),
     "SIGNING_KEY": env("DJANGO_SECRET_KEY"),
 }
@@ -348,6 +348,11 @@ SIMPLE_JWT = {
 BLOG_TITLE_MAX_LENGTH = 120
 
 # # https://dj-rest-auth.readthedocs.io/en/latest/installation.html#json-web-token-jwt-support-optional
-REST_USE_JWT = True
-# JWT_AUTH_COOKIE = "the-so-so-blog-auth"
-# JWT_AUTH_REFRESH_COOKIE = "the-so-so-blog-refresh"
+REST_AUTH = {
+    "USE_JWT": True,
+    "JWT_AUTH_COOKIE": "sosoblog_cookie",
+    "JWT_AUTH_REFRESH_COOKIE": "sosoblog_refresh_cookie",
+}
+
+
+# Simple JWT
