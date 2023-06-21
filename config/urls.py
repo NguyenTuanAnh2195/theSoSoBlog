@@ -11,14 +11,15 @@ VERSION = "v1"
 
 urlpatterns = [
     # Django Admin, use {% url 'admin:index' %}
-    path(settings.ADMIN_URL, admin.site.urls),
+    # path(settings.ADMIN_URL, admin.site.urls),
     # Django-rest-auth urls for authentication and registration
-    path(f"api/{VERSION}/auth/", include("rest_auth.urls")),
-    path(f"api/{VERSION}/auth/registration", include("rest_auth.registration.urls")),
+    path(f"api/{VERSION}/auth/", include("dj_rest_auth.urls")),
+    path(f"api/{VERSION}/auth/registration", include("dj_rest_auth.registration.urls")),
     # User management
     path(f"api/{VERSION}/users/", include("the_so_so_blog.users.urls", namespace="users")),
     path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls", namespace="blog")),
-    # Your stuff: custom urls includes go here
+    # Index view, built with reactjs
+    path("", TemplateView.as_view(template_name="base.html")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
@@ -52,7 +53,6 @@ if settings.DEBUG:
             kwargs={"exception": Exception("Page not Found")},
         ),
         path("500/", default_views.server_error),
-        path("hello-webpack/", TemplateView.as_view(template_name="base.html")),
     ]
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
