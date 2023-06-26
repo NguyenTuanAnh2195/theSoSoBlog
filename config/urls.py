@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
 from django.views import defaults as default_views
 from django.views.generic import TemplateView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
@@ -19,7 +19,9 @@ urlpatterns = [
     path(f"api/{VERSION}/users/", include("the_so_so_blog.users.urls", namespace="users")),
     path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls", namespace="blog")),
     # Index view, built with reactjs
-    path("", TemplateView.as_view(template_name="base.html")),
+    # ALWAYS PLACE THESE AT THE END OF YOUR URL CONFIG
+    path("blog/", TemplateView.as_view(template_name="base.html"), name="index"),
+    re_path(r"blog/.*", TemplateView.as_view(template_name="base.html"), name="sub_index"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # API URLS
