@@ -1,17 +1,18 @@
 import React from "react";
+import { Outlet } from "react-router-dom";
+
 import Header from "./header";
 import Navbar from "./navbar";
-import BlogIndex from "./blogs";
-import "../styles/base/mainpage.scss";;
+import "../styles/base/mainpage.scss";
 
-function MainPage(props) {
-  
+
+function MainPage() {
   return (
     <div className="main-page">
       <Header />
       <div className="main-content">
         <Navbar />
-        <BlogIndex />   
+        <Outlet />
       </div>
     </div>
   )

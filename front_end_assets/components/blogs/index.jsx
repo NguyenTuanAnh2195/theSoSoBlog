@@ -2,6 +2,8 @@ import React from "react";
 import BlogPreview from "./previews";
 import "../../styles/blogs/index.scss";
 
+
+
 function BlogIndex(props) {
   const blogs = [
     {"category": "PROGRAMMING", "thumbnail": "#", "title": "Top 6 free website mockup tools 2022", "content": "This is the content for post 1", "author": {"fullName": "Tuan Anh Nguyen", "email": "tuananhnguyen@mail.com"}},
