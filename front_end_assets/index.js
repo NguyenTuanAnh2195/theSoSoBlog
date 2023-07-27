@@ -9,9 +9,14 @@ import { RecoilRoot } from "recoil";
 import { rootUrl } from "./common";
 import MainPage from "./components/main_page.jsx";
 import CommonInfo from "./components/common_info.jsx";
+import Error from "./components/errors";
+import BlogIndex from "./components/blogs";
+import BlogDetail from "./components/blogs/detail";
+import {
+  blogByIdLoader
+} from "./components/utilities/loaders";
 
-
-const NotFound = function () {
+const NotFound = function() {
   return (
     <CommonInfo message="You will have to look elsewhere for this page!" />
   );
@@ -19,11 +24,16 @@ const NotFound = function () {
 
 const router = createBrowserRouter([
   {
-    path: `/${rootUrl}`,
+    path: `/${rootUrl}/`,
     element: <MainPage />,
+    errorElement: <Error />,
+    chidlren: [
+      { path: "", element: <BlogIndex /> },
+      { path: "/:blogId", element: <BlogDetail />, loader: blogByIdLoader}
+    ]
   },
   {
-    path: `/${rootUrl}/not_found`,
+    path: `/${rootUrl}/*`,
     element: <NotFound />,
   }
 ]);
@@ -32,7 +42,9 @@ const router = createBrowserRouter([
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <RecoilRoot>
-    <RouterProvider router={router}/>
-  </RecoilRoot>
+  <React.StrictMode>
+    <RecoilRoot>
+      <RouterProvider router={router}/>
+    </RecoilRoot>
+  </React.StrictMode>
 );

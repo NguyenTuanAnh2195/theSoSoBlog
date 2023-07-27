@@ -8,8 +8,7 @@ from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 
 VERSION = "v1"
-
-urlpatterns = [
+api_urls = [
     # Django Admin, use {% url 'admin:index' %}
     # path(settings.ADMIN_URL, admin.site.urls),
     # Django-rest-auth urls for authentication and registration
@@ -18,12 +17,15 @@ urlpatterns = [
     # User management
     path(f"api/{VERSION}/users/", include("the_so_so_blog.users.urls", namespace="users")),
     path(f"api/{VERSION}/blog/", include("the_so_so_blog.blog_posts.urls", namespace="blog")),
+]
+urlpatterns = [
     # Index view, built with reactjs
     # ALWAYS PLACE THESE AT THE END OF YOUR URL CONFIG
     path("blog/", TemplateView.as_view(template_name="base.html"), name="index"),
     re_path(r"blog/.*", TemplateView.as_view(template_name="base.html"), name="sub_index"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns += api_urls
 # API URLS
 urlpatterns += [
     # DRF auth token
